@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include"stdafx.h"
 #include <iostream>
 #include <conio.h>
 using namespace std;
@@ -7,14 +7,16 @@ int tabs = 0;
 unsigned int number = 0;
 unsigned int k = 0;
 
+template <class Type>
 class BinarySearchTree
 {
-public:
-	unsigned int data; 
+private:
+	Type data;
 	BinarySearchTree *left; 
 	BinarySearchTree *right; 
- 
-void Add(unsigned int new_data, BinarySearchTree *&root)
+	
+public:
+void Add(Type new_data, BinarySearchTree *&root)
 {
 	if (!root)
 	{
@@ -40,7 +42,7 @@ void Search(BinarySearchTree *root)
 	}
 	k++; 
 
-	if(root->data == number) cout << "The number " << number << " was found.";
+	if(root->data == number) cout << "The number " << number << " was found";
 	
 	Search(root->left);
 	Search(root->right);
@@ -74,8 +76,8 @@ void FreeTree(BinarySearchTree *root)
 };
 int main(void)
 {
-	BinarySearchTree *root = 0;
-	BinarySearchTree *ptr = 0;
+	BinarySearchTree<unsigned int> *root = 0;
+	BinarySearchTree<unsigned int> *ptr = 0;
 
 	unsigned int* node;
 	unsigned int size = 0;
@@ -103,7 +105,7 @@ int main(void)
 
 	ptr->FreeTree(root);
  	delete [] node;
-	cout << endl << endl << "Press any button to exit the program" << endl;
+	cout << endl << endl << "Press any button to exit the program " << endl;
 	system("pause");
 	return 0;
 }
