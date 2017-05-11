@@ -1,5 +1,3 @@
-// Work5.cpp:
-//
 #include "stdafx.h"
 #include <iostream>
 #include <stdlib.h>
@@ -99,7 +97,7 @@ public:
 		cin >> number;
 		if (number == root->data)
 		{
-			cout << endl << "[-] Error: You are trying to remove the root of the tree!" << endl;
+			cout << endl << "Error: You are trying to remove the root of the tree!" << endl;
 			return;
 		}
 
@@ -192,7 +190,8 @@ int main(void)
 	}
 	catch (int test)
 	{
-		cout << endl << "[-] Exception " << test << ": The number of nodes can't be negative!!!" << endl;
+		cout << endl << "Exception " << test << ": The number of nodes can't be negative!" << endl;
+		system("pause");
 		return 0;
 	}
 	size = temp;
@@ -209,7 +208,8 @@ int main(void)
 
 		catch (int test)
 		{
-			cout << endl << "[-] Exception " << test << ": The node of tree can't be negative!!!" << endl;
+			cout << endl << "Exception " << test << ": The node of tree can't be negative!" << endl;
+			system("pause");
 			return 0;
 		}
 		node[i] = temp;
@@ -225,13 +225,13 @@ int main(void)
 	cout << endl << endl << "Binary Search Tree:" << endl;
 	ptr->print(root);
 	ptr->Search(root);
-	if (n == 0) cout << endl << "[-] The number " << number << " was not found!:(";
+	if (n == 0) cout << endl << "The number " << number << " was not found!";
 	ptr->Deletion(root);
 	cout << endl << "The result of deletion: " << endl;
 	ptr->print(root);
 	ptr->FreeTree(root);
 	delete[] node;
 	cout << endl << endl << "Press any button to exit the program " << endl;
-	_getch();
+	system("pause");
 	return 0;
 }
