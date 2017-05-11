@@ -16,6 +16,7 @@ class BinarySearchTree
 
 private:
 	Type data;
+	Type max;
 	BinarySearchTree *left;
 	BinarySearchTree *right;
 	BinarySearchTree *parent;
@@ -53,7 +54,7 @@ public:
 
 		if (root->data == number)
 		{
-			cout << endl << "[+] The number " << number << " was found!:)";
+			cout << endl << "The number " << number << " was found!";
 			n++;
 		}
 		Search(root->left);
@@ -62,51 +63,39 @@ public:
 
 
 
-	void print_line(BinarySearchTree *root)
-
-	{
-		if (!root) return;
-		print_line(root->right);
-		cout << root->data << " ";
-		print_line(root->left);
-		return;
-	}
-
-
-
 	void print(BinarySearchTree *root)
-
 	{
 		if (!root) return;
+
 		tabs++;
 		print(root->right);
+
 		for (int i = 0; i < tabs; i++) cout << "- ";
 		cout << root->data << endl;
+
 		print(root->left);
 		tabs--;
+
 		return;
 	}
 
-
-
 	void Deletion(BinarySearchTree *root)
-
 	{
 		if (!root) return;
+
 		cout << endl << endl << "Type the node you want to delete: ";
 		cin >> number;
+
 		if (number == root->data)
 		{
 			cout << endl << "Error: You are trying to remove the root of the tree!" << endl;
+			system("pause");
 			return;
 		}
 
-
-
 		removeNode(root, number, parent);
+
 	}
-
-
 
 	BinarySearchTree* findMaxNode(BinarySearchTree *root)
 	{
@@ -115,13 +104,11 @@ public:
 		return root;
 	}
 
-
-
 	void removeNode(BinarySearchTree *root, int number, BinarySearchTree *parent) {
-
 		if (root == NULL) {
 			return;
 		}
+
 		if (root->data > number) removeNode(root->left, number, root);
 		else if (root->data < number) removeNode(root->right, number, root);
 		else
@@ -139,7 +126,6 @@ public:
 				root->data = localMax->data;
 				removeNode(root->left, localMax->data, root);
 			}
-
 			else if (root->right)
 			{
 				if (root->left == parent) parent->left = root->right;
@@ -157,8 +143,6 @@ public:
 		}
 	}
 
-
-
 	void FreeTree(BinarySearchTree *&root)
 	{
 		if (root != NULL)
@@ -168,20 +152,21 @@ public:
 			delete root;
 			root = NULL;
 		}
+
 		return;
 	}
+
 };
 
-
-
 int main(void)
-
 {
 	BinarySearchTree<unsigned int> *root = 0;
-	BinarySearchTree<unsigned int> *ptr=0;
+	BinarySearchTree<unsigned int> *ptr = 0;
+
 	unsigned int* node;
 	unsigned int size = 0;
 	auto temp = 0;
+
 	cout << "Print the number of nodes: ";
 	cin >> temp;
 	try
@@ -195,17 +180,17 @@ int main(void)
 		return 0;
 	}
 	size = temp;
+
 	node = new unsigned int[size];
+
 	for (unsigned int i = 0; i < size; ++i)
 	{
 		cout << "Add node " << i + 1 << ": ";
 		cin >> temp;
-
 		try
 		{
 			if (temp < 0) throw 2;
 		}
-
 		catch (int test)
 		{
 			cout << endl << "Exception " << test << ": The node of tree can't be negative!" << endl;
@@ -215,20 +200,21 @@ int main(void)
 		node[i] = temp;
 		cout << endl;
 	}
+
+
 	for (unsigned int i = 0; i < size; ++i)
 	{
 		ptr->Add(node[i], root);
 	}
 
-	cout << endl << size << " ";
-	ptr->print_line(root);
-	cout << endl << endl << "Binary Search Tree:" << endl;
 	ptr->print(root);
 	ptr->Search(root);
 	if (n == 0) cout << endl << "The number " << number << " was not found!";
+
 	ptr->Deletion(root);
 	cout << endl << "The result of deletion: " << endl;
 	ptr->print(root);
+
 	ptr->FreeTree(root);
 	delete[] node;
 	cout << endl << endl << "Press any button to exit the program " << endl;
